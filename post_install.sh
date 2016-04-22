@@ -9,20 +9,12 @@ then
   done
 fi
 
-chroot /target adduser --gecos "" --disabled-password steam
-chroot /target usermod -a -G desktop,audio,dip,video,plugdev,netdev,bluetooth,pulse-access steam
-chroot /target usermod -a -G pulse-access desktop
-cat - > /target/usr/share/lightdm/lightdm.conf.d/20_steamos.conf << 'EOF'
-[SeatDefaults]
-pam-service=lightdm-autologin
-autologin-user=steam
-autologin-user-timeout=0
-EOF
+chroot /target usermod -a -G desktop,audio,dip,video,plugdev,netdev,bluetooth,pulse-access desktop
 
 cp -r /cdrom/recovery /target/boot > /target/var/log/post_install.log
 mv /target/boot/recovery/live /target/boot/recovery/live-hd
 chroot /target date > /target/etc/skel/.imageversion
-cp /target/etc/skel/.imageversion /target/home/steam/.imageversion
+cp /target/etc/skel/.imageversion /target/home/desktop/.imageversion
 
 #
 # Add post-logon configuration script
@@ -53,12 +45,10 @@ then
   # pass -exitsteam so steam doesn't actually run after bootstrapping
   steam -exitsteam
   rm ~/.steam/starting
-  cp ~/.local/share/Steam/steam_install_agreement.txt ~/.steam/steam_install_agreement.txt
   sudo /usr/bin/post_logon.sh
   exit
 fi
 dbus-send --system --type=method_call --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User1000 org.freedesktop.Accounts.User.SetXSession string:gnome
-dbus-send --system --type=method_call --print-reply --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User1001 org.freedesktop.Accounts.User.SetXSession string:steamos
 systemctl enable build-dkms
 (for i in `dkms status | cut -d, -f1-2 | tr , / | tr -d ' '`; do sudo dkms remove $i --all; done) | zenity --progress --no-cancel --pulsate --auto-close --text="Configuring Kernel Modules" --title="SteamOS Installation"
 plymouth-set-default-theme -R steamos
@@ -66,10 +56,9 @@ update-grub
 grub-set-default 0
 # boot into recovery partition on the next boot
 grub-reboot "Capture System Partition"
-passwd --delete desktop
 rm /etc/sudoers.d/post_logon
 rm /usr/bin/post_logon.sh && reboot
-rm /home/steam/.config/autostart/post_logon.desktop
+rm /home/desktop/.config/autostart/post_logon.desktop
 EOF
 chmod +x /target/usr/bin/post_logon.sh
 
@@ -81,7 +70,7 @@ echo ALL ALL=NOPASSWD: /usr/bin/post_logon.sh > /target/etc/sudoers.d/post_logon
 #
 # Set post logon to run at the first logon
 #
-cat - > /target/home/steam/.config/autostart/post_logon.desktop << 'EOF'
+cat - > /target/home/desktop/.config/autostart/post_logon.desktop << 'EOF'
 [Desktop Entry]
 Type=Application
 Exec=/usr/bin/post_logon.sh

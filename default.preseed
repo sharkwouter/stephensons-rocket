@@ -47,7 +47,7 @@ d-i netcfg/enable boolean false
 d-i netcfg/wireless_wep string
 d-i   hw-detect/load_firmware boolean false
 hw-detect hw-detect/load_firmware boolean false
-d-i netcfg/get_hostname string steamos
+d-i netcfg/get_hostname string vaporos-desktop
 
 ### Mirror settings
 # If you select ftp, the mirror/country string does not need to be set.
