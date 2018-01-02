@@ -3,12 +3,12 @@
 BUILD="./buildroot"
 DISTNAME="brewmaster"
 ISOPATH="."
-ISONAME="rocket.iso"
-ISOVNAME="Stephensons Rocket 2.64plus1"
+ISONAME="vaporos-latest.iso"
+ISOVNAME="VaporOS Desktop 2.121plus1"
 UPSTREAMURL="http://repo.steampowered.com"
 STEAMINSTALLFILE="SteamOSDVD.iso"
 MD5SUMFILE="MD5SUMS"
-KNOWNINSTALLER="69fd64adf38c68d9353a837c9c7b0a2c"
+KNOWNINSTALLER="be78c71007c5013746faf18134c3fd83"
 REPODIR="./archive-mirror/mirror/repo.steampowered.com/steamos"
 
 #Show how to use gen.sh
@@ -136,7 +136,7 @@ createbuildroot ( ) {
 	#Delete 32-bit udebs and d-i, as SteamOS is 64-bit only
 	echo "Deleting 32-bit garbage from ${BUILD}..."
 	find ${BUILD} -name "*_i386.udeb" -type f -exec rm -rf {} \;
-	find ${BUILD} -name "*_i386.deb" | egrep -v "(\/steamos-modeswitch-inhibitor\/|\/glibc\/|\/elfutils\/|\/expat\/|\/fglrx-driver\/|\/gcc-4.9\/|\/libdrm\/|\/libffi\/|\/libpciaccess\/|\/libvdpau\/|\/libx11\/|\/libxau\/|\/libxcb\/|\/libxdamage\/|\/libxdmcp\/|\/libxext\/|\/libxfixes\/|\/libxxf86vm\/|\/libxrandr\/|\/llvm-toolchain-3.5\/|\/mesa\/|\/nvidia-graphics-drivers\/|\/s2tc\/|\/zlib\/|\/udev\/|\/libxshmfence\/|\/steam\/|\/intel-vaapi-driver\/|\/libva\/|\/systemd\/|\/libedit\/|\/ncurses\/|\/libxrender\/|\/libbsd\/)" | xargs rm -f
+	find ${BUILD} -name "*_i386.deb" | egrep -v "(\/steamos-modeswitch-inhibitor\/|\/glibc\/|\/elfutils\/|\/expat\/|\/fglrx-driver\/|\/gcc-4.9\/|\/libdrm\/|\/libffi\/|\/libpciaccess\/|\/libvdpau\/|\/libx11\/|\/libxau\/|\/libxcb\/|\/libxdamage\/|\/libxdmcp\/|\/libxext\/|\/libxfixes\/|\/libxxf86vm\/|\/libxrandr\/|\/llvm-toolchain-3.5\/|\/mesa\/|\/nvidia-graphics-drivers\/|\/s2tc\/|\/zlib\/|\/udev\/|\/libxshmfence\/|\/steam\/|\/intel-vaapi-driver\/|\/libva\/|\/systemd\/|\/libedit\/|\/ncurses\/|\/libxrender\/|\/libbsd\/|\/steamos-packages\/)" | xargs rm -f
 	rm -fr "${BUILD}/install.386"
 	rm -fr "${BUILD}/dists/*/main/debian-installer/binary-i386/"
 
