@@ -136,7 +136,7 @@ createbuildroot ( ) {
 	#Delete 32-bit udebs and d-i, as SteamOS is 64-bit only
 	echo "Deleting 32-bit garbage from ${BUILD}..."
 	find ${BUILD} -name "*_i386.udeb" -type f -exec rm -rf {} \;
-	find ${BUILD} -name "*_i386.deb" | egrep -v "(\/steamos-modeswitch-inhibitor\/|\/glibc\/|\/elfutils\/|\/expat\/|\/fglrx-driver\/|\/gcc-4.9\/|\/libdrm\/|\/libffi\/|\/libpciaccess\/|\/libvdpau\/|\/libx11\/|\/libxau\/|\/libxcb\/|\/libxdamage\/|\/libxdmcp\/|\/libxext\/|\/libxfixes\/|\/libxxf86vm\/|\/libxrandr\/|\/llvm-toolchain-3.5\/|\/mesa\/|\/nvidia-graphics-drivers\/|\/s2tc\/|\/zlib\/|\/udev\/|\/libxshmfence\/|\/steam\/|\/intel-vaapi-driver\/|\/libva\/|\/systemd\/|\/libedit\/|\/ncurses\/|\/libxrender\/|\/libbsd\/|\/steamos-packages\/)" | xargs rm -f
+	#find ${BUILD} -name "*_i386.deb" | egrep -v "(\/steamos-modeswitch-inhibitor\/|\/glibc\/|\/elfutils\/|\/expat\/|\/fglrx-driver\/|\/gcc-4.9\/|\/libdrm\/|\/libffi\/|\/libpciaccess\/|\/libvdpau\/|\/libx11\/|\/libxau\/|\/libxcb\/|\/libxdamage\/|\/libxdmcp\/|\/libxext\/|\/libxfixes\/|\/libxxf86vm\/|\/libxrandr\/|\/llvm-toolchain-3.5\/|\/mesa\/|\/nvidia-graphics-drivers\/|\/s2tc\/|\/zlib\/|\/udev\/|\/libxshmfence\/|\/steam\/|\/intel-vaapi-driver\/|\/libva\/|\/systemd\/|\/libedit\/|\/ncurses\/|\/libxrender\/|\/libbsd\/|\/steamos-packages\/)" | xargs rm -f
 	rm -fr "${BUILD}/install.386"
 	rm -fr "${BUILD}/dists/*/main/debian-installer/binary-i386/"
 
@@ -177,11 +177,11 @@ createbuildroot ( ) {
 		cp -pfr ${file} ${BUILD}
 	done
 
-	sed -i 's/fglrx-driver//' ${BUILD}/.disk/base_include
-	sed -i 's/fglrx-modules-dkms//' ${BUILD}/.disk/base_include
-	sed -i 's/libgl1-fglrx-glx//' ${BUILD}/.disk/base_include
-	sed -i 's/nvidia-driver//' ${BUILD}/.disk/base_include
-	echo "keyboard-configuration" >> ${BUILD}/.disk/base_include
+	#sed -i 's/fglrx-driver//' ${BUILD}/.disk/base_include
+	#sed -i 's/fglrx-modules-dkms//' ${BUILD}/.disk/base_include
+	#sed -i 's/libgl1-fglrx-glx//' ${BUILD}/.disk/base_include
+	#sed -i 's/nvidia-driver//' ${BUILD}/.disk/base_include
+	#echo "keyboard-configuration" >> ${BUILD}/.disk/base_include
 }
 
 # Removes old versions of packages before they end up on the iso
