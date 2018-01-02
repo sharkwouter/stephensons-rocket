@@ -404,8 +404,8 @@ for MOD in ${MODSTOADD}; do
 	addmod ${MOD}
 done
 
-#Check if there are multiple versions of packages in the buildroot
-checkduplicates
+#Check if there are multiple versions of packages in the buildroot, currently broken so disabled
+#checkduplicates
 
 #Build ISO for Rocket installer
 createiso
