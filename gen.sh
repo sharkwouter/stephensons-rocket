@@ -201,7 +201,7 @@ checkduplicates ( ) {
 		# Seperate packages with different architectures
 		curdupamd64=$(echo $curdupfiles|tr "\ " "\n"|grep amd64)
 		curdupi386=$(echo $curdupfiles|tr "\ " "\n"|grep i386)
-		curdupall=$(echo $curdupfiles|tr "\ " "\n"|grep all)
+		curdupall=$(echo $curdupfiles|tr "\ " "\n"|grep -v amd64|grep -v i386|grep all)
 		
 		# Check the amount of packages per architecture
 		nramd64=$(echo $curdupamd64|wc -w)
